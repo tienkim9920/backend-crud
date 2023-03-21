@@ -31,29 +31,63 @@ let blogs = [
 ];
 
 app.get('/blogs', (req, res) => {
-    const response = new BaseResponse(blogs, 200, "Successful!");
-    res.json(response);
+    try {
+        res.json(new BaseResponse(blogs, 200, "Successful!"));
+    } catch (error) {
+        res.json(new BaseResponse(404, "Error!"));
+    }
 })
 
 app.post('/blogs', (req, res) => {
-    blogs.push(req.body);
-    const response = new BaseResponse(req.body, 200, "Successful!");
-    res.json(response);
+    try {
+        blogs.push(req.body);
+        res.json(new BaseResponse(req.body, 200, "Successful!"));
+    } catch (error) {
+        res.json(new BaseResponse(404, "Error!"));
+    }
 })
 
 app.get('/blogs/:id', (req, res) => {
-    const { id } = req.params;
-    const blog = blogs.find(item => item.id === +id);
-    const response = new BaseResponse(blog, 200, "Successful!");
-    res.json(response);
+    try {
+        const { id } = req.params;
+        const blog = blogs.find(item => item.id === +id);
+        res.json(new BaseResponse(blog, 200, "Successful!"));
+    } catch (error) {
+        res.json(new BaseResponse(404, "Error!"));
+    }
 })
 
 app.delete('/blogs/:id', (req, res) => {
-    const { id } = req.params;
-    const index = blogs.findIndex(item => item.id === id);
-    blogs.splice(index, 1);
-    const response = new BaseResponse(index, 200, "Successful!");
-    res.json(response);
+    try {
+        const { id } = req.params;
+        const index = blogs.findIndex(item => item.id === +id);
+        if (index !== -1) {
+            blogs.splice(index, 1);
+            res.json(new BaseResponse(index, 200, "Successful!"));
+        } else {
+            res.json(new BaseResponse(404, "Error!"));
+        }
+    } catch (error) {
+        res.json(new BaseResponse(404, "Error!"));
+    }
+})
+
+app.patch('/blogs/:id', (req, res) => {
+    try {
+        const { id } = req.params;
+        const index = blogs.findIndex(item => item.id === +id);
+        if (index !== -1) {
+            blogs[index] = {
+                id: +id,
+                ...req.body
+            };
+            res.json(new BaseResponse(blogs[index], 200, "Successful!"));
+        } else {
+            res.json(new BaseResponse(404, "Error!"));
+        }
+    } catch (error) {
+        res.json(new BaseResponse(404, "Error!"));
+    }
 })
 
 server.listen(PORT, () => {

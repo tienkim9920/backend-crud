@@ -7,9 +7,9 @@ class BaseResponse {
 
     json() {
         return {
-            data: this.data,
-            status: this.status,
-            message: this.message,
+            data: this.data || null,
+            status: this.status || null,
+            message: this.message || null,
         }
     }
 }
