@@ -5,15 +5,15 @@ const http = require("http");
 const server = http.createServer(app);
 const PORT = process.env.PORT || 8000;
 
+
 const cors = require("cors");
 app.use(cors());
 
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 app.set("views", path.join(__dirname, "views"));
 
 var bodyParser = require("body-parser");
 const BaseResponse = require("./base.response");
-const path = require("path");
 
 app.use("/", express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,14 +34,6 @@ let accounts = [
         role: 'USER'
     }
 ];
-
-app.use((req, res, next) => {
-    res.setHeader(
-        "Content-Security-Policy",
-        "default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' https://fonts.googleapis.com; script-src 'self';"
-    );
-    next();
-});
 
 app.get('/', (req, res) => {
     res.render('index');
