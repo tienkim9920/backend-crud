@@ -7,11 +7,12 @@ const PORT = process.env.PORT || 8000;
 const cors = require("cors");
 app.use(cors());
 
-app.set('view engine', 'ejs');
-app.set('views', './views');
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 var bodyParser = require("body-parser");
 const BaseResponse = require("./base.response");
+const path = require("path");
 
 app.use("/", express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
