@@ -7,6 +7,9 @@ const PORT = process.env.PORT || 8000;
 const cors = require("cors");
 app.use(cors());
 
+app.set('view engine', 'ejs');
+app.set('views', './views');
+
 var bodyParser = require("body-parser");
 const BaseResponse = require("./base.response");
 
@@ -29,6 +32,10 @@ let accounts = [
         role: 'USER'
     }
 ];
+
+app.get('/', (req, res) => {
+    res.render('index');
+})
 
 app.get('/blogs', (req, res) => {
     try {
