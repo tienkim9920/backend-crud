@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hướng Dẫn Sử Dụng API</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1,
+    h2 {
+      color: #333;
+    }
+
+    .endpoint {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: #fff;
+    }
+
+    pre {
+      background: #f8f8f8;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    .method {
+      font-weight: bold;
+      color: #007BFF;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Hướng Dẫn Sử Dụng API</h1>
+  <p>Hướng dẫn này giải thích cách sử dụng các API có sẵn trong ứng dụng.</p>
+  <section>
+    <p>Máy chủ API chạy trên cổng: <strong>8000</strong> theo mặc định.</p>
+  </section>
+
+  <h2>Các Endpoint</h2>
+
+  <div class="endpoint">
+    <h3>Lấy Danh Sách Blogs</h3>
+    <p><span class="method">GET</span> https://ninedev-api.vercel.app/blogs</p>
+    <p>Trả về danh sách tất cả các blog.</p>
+    <pre>
+Yêu cầu:
+GET /blogs
+
+Phản hồi:
+{
+    "data": [...],
+    "statusCode": 200,
+    "message": "Thành công!"
+}
+        </pre>
+  </div>
+
+  <div class="endpoint">
+    <h3>Thêm Blog Mới</h3>
+    <p><span class="method">POST</span> /blogs</p>
+    <p>Thêm một blog mới.</p>
+    <pre>
+Yêu cầu:
+POST /blogs
+Content-Type: application/json
+{
+    "id": 1,
+    "title": "Tiêu đề Blog",
+    "content": "Nội dung Blog"
+}
+
+Phản hồi:
+{
+    "data": {...},
+    "statusCode": 200,
+    "message": "Thành công!"
+}
+        </pre>
+  </div>
+
+  <div class="endpoint">
+    <h3>Lấy Blog Theo ID</h3>
+    <p><span class="method">GET</span> https://ninedev-api.vercel.app/blogs/:id</p>
+    <p>Truy xuất blog theo ID.</p>
+    <pre>
+Yêu cầu:
+GET /blogs/1
+
+Phản hồi:
+{
+    "data": {...},
+    "statusCode": 200,
+    "message": "Thành công!"
+}
+        </pre>
+  </div>
+
+  <div class="endpoint">
+    <h3>Cập Nhật Blog</h3>
+    <p><span class="method">PATCH</span> https://ninedev-api.vercel.app/blogs/:id</p>
+    <p>Cập nhật một blog hiện có bằng ID.</p>
+    <pre>
+Yêu cầu:
+PATCH /blogs/1
+Content-Type: application/json
+{
+    "title": "Tiêu đề Blog Cập Nhật",
+    "content": "Nội dung Blog Cập Nhật"
+}
+
+Phản hồi:
+{
+    "data": {...},
+    "statusCode": 200,
+    "message": "Thành công!"
+}
+        </pre>
+  </div>
+
+  <div class="endpoint">
+    <h3>Xóa Blog</h3>
+    <p><span class="method">DELETE</span> https://ninedev-api.vercel.app/blogs/:id</p>
+    <p>Xóa một blog bằng ID.</p>
+    <pre>
+Yêu cầu:
+DELETE /blogs/1
+
+Phản hồi:
+{
+    "data": 1,
+    "statusCode": 200,
+    "message": "Thành công!"
+}
+        </pre>
+  </div>
+
+  <div class="endpoint">
+    <h3>Đăng Nhập</h3>
+    <p><span class="method">POST</span> https://ninedev-api.vercel.app/account/login</p>
+    <p>Xác thực người dùng.</p>
+    <pre>
+Yêu cầu:
+POST /account/login
+Content-Type: application/json
+{
+    "username": "admin",
+    "password": "123@a"
+}
+
+Phản hồi:
+{
+    "data": {...},
+    "statusCode": 200,
+    "message": "Thành công!"
+}
+        </pre>
+  </div>
+</body>
+
+</html>
