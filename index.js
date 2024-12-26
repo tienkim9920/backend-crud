@@ -19,7 +19,26 @@ app.use("/", express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-let blogs = [];
+let blogs = [
+    {
+        "id": 0.14119349310726625,
+        "title": "Ninedev Test 01",
+        "body": "500000",
+        "author": "mario"
+    },
+    {
+        "id": 0.2539564750904526,
+        "title": "Ninedev Test 02",
+        "body": "400000",
+        "author": "mario"
+    },
+    {
+        "id": 0.6664675710511545,
+        "title": "Ninedev Test 03",
+        "body": "300000",
+        "author": "yoshi"
+    }
+];
 let accounts = [
     {
         id: 1,
