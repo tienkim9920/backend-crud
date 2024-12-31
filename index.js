@@ -85,6 +85,34 @@ app.get('/blogs/:id', (req, res) => {
     }
 })
 
+app.get('/refresh', (req, res) => {
+    try {
+        blogs = [
+            {
+                "id": 0.14119349310726625,
+                "title": "Ninedev Test 01",
+                "body": "500000",
+                "author": "mario"
+            },
+            {
+                "id": 0.2539564750904526,
+                "title": "Ninedev Test 02",
+                "body": "400000",
+                "author": "mario"
+            },
+            {
+                "id": 0.6664675710511545,
+                "title": "Ninedev Test 03",
+                "body": "300000",
+                "author": "yoshi"
+            }
+        ]
+        res.json(new BaseResponse(blogs, 200, "Successful!"));
+    } catch (error) {
+        res.json(new BaseResponse(404, "Error!"));
+    }
+})
+
 app.delete('/blogs/:id', (req, res) => {
     try {
         const { id } = req.params;
