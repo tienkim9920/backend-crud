@@ -119,7 +119,7 @@ app.delete('/blogs/:id', (req, res) => {
         const index = blogs.findIndex(item => item.id === +id);
         if (index !== -1) {
             blogs.splice(index, 1);
-            res.json(new BaseResponse(index, 200, "Successful!"));
+            res.json(new BaseResponse(1, 200, "Successful!"));
         } else {
             res.json(new BaseResponse(404, "Error!"));
         }
