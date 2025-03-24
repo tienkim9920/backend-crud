@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Hình Ảnh</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1,
+    h2 {
+      color: #333;
+    }
+
+    .endpoint {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: #fff;
+    }
+
+    pre {
+      background: #f8f8f8;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    .method {
+      font-weight: bold;
+      color: #007BFF;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Import hình ảnh ở đây!</h1>
+  <input type="file" id="imageInput" accept="image/png, image/jpeg, image/jpg">
+
+  <script>
+    function convertToWebP(file, quality = 0.8, callback) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file); // Chuyển ảnh sang Base64
+
+      reader.onload = function (event) {
+        const img = new Image();
+        img.src = event.target.result;
+
+        img.onload = function () {
+          const canvas = document.createElement("canvas");
+          const ctx = canvas.getContext("2d");
+
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          // Chuyển thành WebP với chất lượng tối ưu
+          const webpDataUrl = canvas.toDataURL("image/webp", quality);
+          callback(webpDataUrl);
+        };
+      };
+    }
+
+    // Sử dụng hàm: Chuyển file ảnh input thành WebP
+    document.getElementById("imageInput").addEventListener("change", function (event) {
+      const file = event.target.files[0];
+
+      convertToWebP(file, 0.8, function (webpBase64) {
+        console.log("Ảnh WebP Base64:", webpBase64);
+
+        // Tải xuống ảnh WebP
+        const link = document.createElement("a");
+        link.href = webpBase64;
+        link.download = "converted.webp";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    });
+  </script>
+
+  <footer>
+    <p>Máy chủ API chạy trên cổng: <strong>8000</strong> theo mặc định.</p>
+  </footer>
+</body>
+
+</html>

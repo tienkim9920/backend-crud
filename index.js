@@ -58,6 +58,10 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
+app.get('/upload-image', (req, res) => {
+    res.render('upload');
+})
+
 app.get('/blogs', (req, res) => {
     try {
         res.json(new BaseResponse(blogs, 200, "Successful!"));
